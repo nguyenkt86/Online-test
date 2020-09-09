@@ -1,0 +1,84 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Competition</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Competition</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<section class="content">
+  <div class="container-fluid">
+
+    <!-- /.row -->
+    <!-- Main row -->
+    <div class="row" style="padding: 0 7px">
+
+      <div class="card mb-3" style="width: 100%; height:100%">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <i class="fas fa-table"></i>
+              Add-Competition
+            </div>
+          </div>
+        </div>
+      <div class="card-body">
+        <div class="container">
+          <form [formGroup]="competitionsaveform" #savestudent (ngSubmit)="saveCompetition()">
+            <div class="form-group">
+                <input type="text" class="form-control"  formControlName="student_name" placeholder="Competition" data-toggle="tooltip"
+                   data-placement="right" title="Enter Student Name" >
+                <div class="alert alert-danger" *ngIf = "(competitionName.touched) && (competitionName.invalid)"
+                  style="margin-top: 5px;">
+                    <span *ngIf="competitionName.errors.required">Student Name is Required</span>
+                      <span *ngIf = "competitionName.errors.minlength">
+                          MinLength Error
+                      </span>
+                  </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!-- /.row (main row) -->
+  </div><!-- /.container-fluid -->
+</div>
+</section>
+<ng-template #showConfirm>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">Notification</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalref.hide()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      Would you like to add this Competition?
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modalref.hide()"> Accept</button>
+      <button type="button" class="btn btn-danger" (click)="modalref.hide()" >Close</button>
+  </div>
+</ng-template>
+<ng-template #notify>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">THÔNG BÁO</h4>
+      <button type="button" class="close pull-right" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-primary" >OK</button>
+  </div>
+</ng-template>
