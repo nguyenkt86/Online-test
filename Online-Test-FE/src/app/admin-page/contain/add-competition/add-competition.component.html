@@ -13,6 +13,17 @@
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
 </div>
+<div class="row" [hidden]="!createMessage">
+
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+          <div class="alert alert-info alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" (click)="onClose1()" >×</button>
+                  <strong>Create Success!</strong>
+          </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
 <!-- /.content-header -->
 <section class="content">
   <div class="container-fluid">
@@ -32,19 +43,24 @@
         </div>
       <div class="card-body">
         <div class="container">
-          <form [formGroup]="competitionsaveform" #savestudent (ngSubmit)="saveCompetition()">
+          <form [formGroup]="competitionsaveform" (ngSubmit)="saveCompetition()">
             <div class="form-group">
-                <input type="text" class="form-control"  formControlName="student_name" placeholder="Competition" data-toggle="tooltip"
-                   data-placement="right" title="Enter Student Name" >
+                <input type="text" class="form-control"  formControlName="competition_name" placeholder="Competition Name" data-toggle="tooltip"
+                   data-placement="right" title="Enter Competition Name" >
                 <div class="alert alert-danger" *ngIf = "(competitionName.touched) && (competitionName.invalid)"
                   style="margin-top: 5px;">
-                    <span *ngIf="competitionName.errors.required">Student Name is Required</span>
-                      <span *ngIf = "competitionName.errors.minlength">
-                          MinLength Error
-                      </span>
-                  </div>
+                    <span *ngIf="competitionName.errors.required">Competition Name is Required</span>
+                </div>
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <div class="form-group">
+              <input type="text" class="form-control"  formControlName="detail" placeholder="Detail" data-toggle="tooltip"
+                 data-placement="right" title="Enter Detail" >
+              <div class="alert alert-danger" *ngIf = "(detail.touched) && (detail.invalid)"
+                style="margin-top: 5px;">
+                  <span *ngIf="detail.errors.required">Detail is Required</span>
+              </div>
+          </div>
+            <button type="submit" class='btn btn-primary' >Submit</button>
         </form>
         </div>
       </div>

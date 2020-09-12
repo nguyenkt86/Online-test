@@ -1,1 +1,117 @@
-<p>question-bank-page works!</p>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Question-Bank</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Question-Bank</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  
+  <div class="row" [hidden]="!deleteMessage">
+  
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+            <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Question-Bank Data Deleted</strong>
+            </div>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+  
+  <section class="content">
+    <div class="container-fluid">
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row" style="padding: 0 7px">
+            <div class="card mb-3" style="width: 100%; height:100%">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <i class="fas fa-table"></i>
+                            List-QuestionBank
+                        </div>
+                        <div class="col-md-6">
+                            <button routerLink="../add-questionbank" class="btn btn-primary"><i class="far fa-plus-square"></i>
+                                Add Question-Bank</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="border-radius: 5px" datatable [dtOptions]="dtOptions"
+                        [dtTrigger]="dtTrigger" >
+                            <thead >
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">questionName</th>
+                                    <th scope="col">result</th>
+                                    <th scope="col">level</th>
+                                    <th scope="col">subjectId</th>
+                                    <th scope="col">competitionId</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let questionBank of questions ">
+                                  <td>{{questionBank.id}}</td>
+                                  <td>{{questionBank.questionName}}</td>
+                                  <td>{{questionBank.result}}</td>
+                                  <td>{{questionBank.level}}</td>
+                                  <td>{{questionBank.subjectId}}</td>
+                                  <td>{{questionBank.competitionId}}</td>
+                                  <td><button (click)= "Confirm(del)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+                                  <button  class='btn btn-info'
+                                   >Update</button>
+                                  </td>
+                                  <ng-template #del>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title pull-left">
+                                            <i class="fas fa-file-alt"></i>
+                                            DELETE QUESTION-BANK
+                                        </h4>
+                                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalref.hide()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Are you sure you want to delete this Question-Bank?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" (click)="deleteQuestionBank(questionBank.id)" (click)="modalref.hide()" >Accept</button>
+                                        <button type="button" class="btn btn-danger" (click)="modalref.hide()">Close</button>
+                                    </div>
+                                </ng-template>
+                                </tr>
+                                </tbody><br>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+  </section>
+  
+  <ng-template #notify>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">THÔNG BÁO</h4>
+        <button type="button" class="close pull-right" aria-label="Close" >
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" >OK</button>
+    </div>
+  </ng-template>
+  

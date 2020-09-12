@@ -21,6 +21,8 @@ import { AddCompetitionComponent } from './admin-page/contain/add-competition/ad
 import { QuestionBankPageComponent } from './admin-page/contain/question-bank-page/question-bank-page.component';
 import { SessionModule } from 'src/app/models/session/session.module';
 import { UpdateAccountComponent } from './admin-page/contain/update-account/update-account.component';
+import { AddQuestionbankComponent } from './admin-page/contain/add-questionbank/add-questionbank.component';
+import { QuestionlistComponent } from './admin-page/contain/questionlist/questionlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,8 @@ import { UpdateAccountComponent } from './admin-page/contain/update-account/upda
   AddCompetitionComponent,
   QuestionBankPageComponent,
   UpdateAccountComponent,
+  AddQuestionbankComponent,
+  QuestionlistComponent,
 
   ],
   imports: [

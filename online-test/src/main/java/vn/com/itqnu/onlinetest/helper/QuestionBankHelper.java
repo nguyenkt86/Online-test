@@ -1,5 +1,6 @@
 package vn.com.itqnu.onlinetest.helper;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class QuestionBankHelper {
 	public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	static String[] HEADERs = { "Id", "Title", "Description", "Published" };
 	static String SHEET = "Question";
-
 	public static boolean hasExcelFormat(MultipartFile file) {
 
 		if (!TYPE.equals(file.getContentType())) {
@@ -28,7 +28,6 @@ public class QuestionBankHelper {
 
 		return true;
 	}
-
 	public static List<Question> excelToTutorials(InputStream is) {
 		try {
 			Workbook workbook = new XSSFWorkbook(is);
@@ -42,7 +41,6 @@ public class QuestionBankHelper {
 			while (rows.hasNext()) {
 				Row currentRow = rows.next();
 
-				// skip header
 				if (rowNumber == 0) {
 					rowNumber++;
 					continue;
@@ -58,7 +56,7 @@ public class QuestionBankHelper {
 
 					switch (cellIdx) {
 					case 0:
-						question.setId(1l);
+						question.setId((long)currentCell.getNumericCellValue());
 						break;
 
 					case 1:
@@ -70,14 +68,14 @@ public class QuestionBankHelper {
 						break;
 
 					case 3:
-						question.setSubjectId((long) currentCell.getNumericCellValue());
+						question.setSubjectId((long)currentCell.getNumericCellValue());
 						break;
 
 					case 4:
-						question.setCompetitionId((long) currentCell.getNumericCellValue());
+						question.setCompetitionId((long)currentCell.getNumericCellValue());
 						break;
 					case 5:
-						question.setLevel((int) currentCell.getNumericCellValue());
+						question.setLevel((int)currentCell.getNumericCellValue());
 						break;
 					default:
 						break;

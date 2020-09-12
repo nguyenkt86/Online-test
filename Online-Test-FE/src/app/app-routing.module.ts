@@ -1,3 +1,5 @@
+import { QuestionlistComponent } from './admin-page/contain/questionlist/questionlist.component';
+import { AddQuestionbankComponent } from './admin-page/contain/add-questionbank/add-questionbank.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminPageComponent } from './admin-page/admin-page.component';
@@ -21,6 +23,8 @@ const routes: Routes = [
       { path: 'add-competition', component: AddCompetitionComponent },
       { path: 'question-bank', component: QuestionBankPageComponent },
       { path: 'update-account', component: UpdateAccountComponent },
+      { path: 'add-questionbank', component: AddQuestionbankComponent },
+      { path: 'question-list', component: QuestionlistComponent },
     ]
 
   },

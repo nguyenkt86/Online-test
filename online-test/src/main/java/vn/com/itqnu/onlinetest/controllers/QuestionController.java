@@ -1,7 +1,10 @@
 package vn.com.itqnu.onlinetest.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import vn.com.itqnu.onlinetest.entity.Competition;
+import vn.com.itqnu.onlinetest.entity.Question;
 import vn.com.itqnu.onlinetest.helper.ExcelHelper;
-import vn.com.itqnu.onlinetest.helper.QuestionBankHelper;
 import vn.com.itqnu.onlinetest.model.QuestionModel;
 import vn.com.itqnu.onlinetest.service.QuestionService;
 import vn.com.itqnu.onlinetest.utils.ResponseMessage;
 import vn.com.itqnu.onlinetest.utils.ResponseUtil;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/questions")
 public class QuestionController {
 
@@ -39,12 +44,11 @@ public class QuestionController {
 			return ResponseUtil.getError(status.BAD_REQUEST, "Create error", e.getMessage());
 		}
 	}
-
 	@PostMapping("/upload")
 	  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
 	    String message = "";
 
-	    if (QuestionBankHelper.hasExcelFormat(file)) {
+	    if (ExcelHelper.hasExcelFormat(file)) {
 	      try {
 	        questionService.save(file);
 
@@ -60,16 +64,20 @@ public class QuestionController {
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
 	  }
 
-	@GetMapping
-	public ResponseEntity<?> getAllQuestion(HttpStatus status) {
-		try {
-			return ResponseUtil.getSuccess(questionService.getAllQuestion());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseUtil.getError(status.BAD_REQUEST, "Get error", e.getMessage());
-		}
-	}
+//	@GetMapping
+//	public ResponseEntity<?> getAllQuestion(HttpStatus status) {
+//		try {
+//			return ResponseUtil.getSuccess(questionService.getAllQuestion());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseUtil.getError(status.BAD_REQUEST, "Get error", e.getMessage());
+//		}
+//	}
 
+	@GetMapping
+	public List<Question> getAllQuestion() {
+		return questionService.getAllQuestion();
+	}
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getQuestionById(@PathVariable(name = "id") Long idQuestion, HttpStatus status) {
 		try {

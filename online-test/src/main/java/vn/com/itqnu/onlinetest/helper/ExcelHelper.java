@@ -80,7 +80,6 @@ public class ExcelHelper {
 			while (rows.hasNext()) {
 				Row currentRow = rows.next();
 
-				// skip header
 				if (rowNumber == 0) {
 					rowNumber++;
 					continue;
@@ -96,7 +95,7 @@ public class ExcelHelper {
 
 					switch (cellIdx) {
 					case 0:
-						account.setId(1l);
+						account.setId((long)currentCell.getNumericCellValue());
 						break;
 
 					case 1:

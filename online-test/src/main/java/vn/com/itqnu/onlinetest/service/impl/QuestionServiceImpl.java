@@ -100,17 +100,6 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public void save(MultipartFile file) {
-		try {
-			List<Question> question = QuestionBankHelper.excelToTutorials(file.getInputStream());
-			questionRepository.saveAll(question);
-		} catch (IOException e) {
-			throw new RuntimeException("fail to store excel data: " + e.getMessage());
-		}
-
-	}
-
-	@Override
 	public List<QuestionModel> getQuestionByCompetition(Long idCompetition) {
 		return questionRepository.findByCompetitionId(idCompetition);
 	}
@@ -147,6 +136,17 @@ public class QuestionServiceImpl implements QuestionService {
 		}
 
 		return listQuestionTest;
+	}
+
+	@Override
+	public void save(MultipartFile file) {
+		// TODO Auto-generated method stub
+		try {
+		      List<Question> quesList = QuestionBankHelper.excelToTutorials(file.getInputStream());
+		      questionRepository.saveAll(quesList);
+		    } catch (IOException e) {
+		      throw new RuntimeException("fail to store excel data: " + e.getMessage());
+		    }
 	}
 
 }

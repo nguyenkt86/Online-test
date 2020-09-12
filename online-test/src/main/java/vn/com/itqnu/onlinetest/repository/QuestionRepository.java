@@ -16,7 +16,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 //	@Query(value = "SELECT new vn.com.itqnu.onlinetest.model.QuestionModel(q, c, a)"
 //			+ " FROM Question q JOIN Competition c ON q.competitionId = c.id JOIN Answer a ON q.id = a.questionId"
 //			+ " WHERE q.competitionId = ?1")
-	
+//	
 //	@Query(value = "SELECT new vn.com.itqnu.onlinetest.model.QuestionModel(q, c)"
 //			+ " FROM Question q JOIN ChosenCompetition c ON q.competitionId = c.id JOIN 
 	List<QuestionModel> findByCompetitionId(Long competitionId);

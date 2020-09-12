@@ -1,0 +1,94 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Question-Bank</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Question-Bank</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <section class="content">
+    <div class="container-fluid">
+  
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row" style="padding: 0 7px">
+  
+        <div class="card mb-3" style="width: 100%; height:100%">
+          <div class="card-header">
+            <div class="row">
+              <div class="col">
+                <i class="fas fa-table"></i>
+                Add-Question-Bank
+              </div>
+            </div>
+          </div>
+        <div class="card-body">
+          <div class="container">
+            <fieldset style="width: 800px; margin: 0 auto; text-align: left;">
+              <legend>{{ title }}</legend>
+  
+              <br>
+              <div *ngIf="fileUpload.status === 'progress'">
+                <progressbar max="100" [value]="fileUpload.message" type="danger" [striped]="true" [animate]="true"><i>{{fileUpload.message}} / 100</i></progressbar>
+              </div>
+  
+              <br>
+              <div class="img-box">{{selectedFile?.name}}</div>
+  
+              <input #fileInput type="file" style="display: none"
+                     (change)="onFileSelected($event)">
+  
+              <button (click)="fileInput.click()">Select File</button>
+              <button (click)="onUpload()">Upload!</button>
+  
+              <br>
+  
+              <p>{{ error }}</p>
+  
+              <br>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </div>
+  </section>
+  <ng-template #showConfirm>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Notification</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalref.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Would you like to add this account?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modalref.hide()"> Accept</button>
+        <button type="button" class="btn btn-danger" (click)="modalref.hide()" >Close</button>
+    </div>
+  </ng-template>
+  <ng-template #notify>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">THÔNG BÁO</h4>
+        <button type="button" class="close pull-right" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+  
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" >OK</button>
+    </div>
+  </ng-template>
+  

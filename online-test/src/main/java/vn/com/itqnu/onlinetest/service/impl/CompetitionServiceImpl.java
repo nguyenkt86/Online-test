@@ -26,6 +26,10 @@ public class CompetitionServiceImpl implements CompetitionService {
 				|| competitionModel.getCompetitionName().trim().length() == 0) {
 			throw new RuntimeException("Competition name is required!");
 		}
+		
+		if(competitionRepository.findByCompetitionName(competitionModel.getCompetitionName())!=null) {
+			
+		}else {
 		Competition competition = new Competition();
 		competition.setCompetitionName(competitionModel.getCompetitionName());
 		competition.setDetail(competitionModel.getDetail());
@@ -38,8 +42,9 @@ public class CompetitionServiceImpl implements CompetitionService {
 		competition.setModifiedDate(new Date());
 
 		competitionRepository.save(competition);
-
-		return competition;
+			return competition;
+		}
+		return null;
 	}
 
 	@Override

@@ -61,19 +61,19 @@ public class CompetitionController {
 		}
 	}
 
-//	@PostMapping()
-//	public ResponseEntity<?> createCompetition(@RequestBody CompetitionModel competitionModel, HttpStatus status) {
-//		try {
-//			return ResponseUtil.getSuccess(competitionService.createCompetition(competitionModel));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return ResponseUtil.getError(status.BAD_REQUEST, "Create error", e.getMessage());
-//		}
-//	}
-	@PostMapping
-	public Competition createCompetition(@RequestBody CompetitionModel competitionModel) {
-		return competitionService.createCompetition(competitionModel);
+	@PostMapping()
+	public ResponseEntity<?> createCompetition(@RequestBody CompetitionModel competitionModel, HttpStatus status) {
+		try {
+			return ResponseUtil.getSuccess(competitionService.createCompetition(competitionModel));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseUtil.getError(status.BAD_REQUEST, "Create error", e.getMessage());
+		}
 	}
+//	@PostMapping
+//	public Competition createCompetition(@RequestBody CompetitionModel competitionModel) {
+//		return competitionService.createCompetition(competitionModel);
+//	}
 
 	@PutMapping
 	public ResponseEntity<?> updateCompetition(@RequestBody CompetitionModel competitionModel, HttpStatus status) {

@@ -93,6 +93,9 @@ export class CompetitionPageComponent implements OnInit {
   changeisUpdate(){
     this.isupdated=false;
   }
+  onClose(){
+    this.deleteMessage=false;
+  }
 
 }
 

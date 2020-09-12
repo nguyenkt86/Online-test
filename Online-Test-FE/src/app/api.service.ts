@@ -10,6 +10,7 @@ export class ApiService {
 
   private baseUrl = 'http://localhost:8080/accounts/';
   private baseUrl1 = 'http://localhost:8080/competitions/';
+  private baseUrl2 = 'http://localhost:8080/questions/';
   private fileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
   private fileSize = 20 * 1024 * 1024; // bytes
   constructor(private http:HttpClient) { }
@@ -56,6 +57,25 @@ export class ApiService {
     return this.http.put(`${this.baseUrl1}/${id}`, value);
   }
   //
+  /// question service
+  UploadExcelQuestions(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl2}` + 'upload', formData);
+  }
+  getQuestionsBankList(): Observable<any> {
+    return this.http.get(`${this.baseUrl2}`);
+  }
+  deleteQuestionBankById(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl2}/${id}`, { responseType: 'text' });
+  }
+
+  getQuestionBankById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl2}/${id}`);
+  }
+
+  updateQuestionBank(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl2}/${id}`, value);
+  }
+  // end question service
   get maxSize(): number {
     return this.fileSize;
   }
@@ -85,6 +105,22 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  /// post upload question bank
+  postUploadFileQuestion(formData: FormData): Observable<any> {
+    const req = new HttpRequest('POST', `${this.baseUrl2}`+"upload", formData, {
+      reportProgress: true
+    });
+
+    // The `HttpClient.request` API produces a raw event stream
+    // which includes start (sent), progress, and response events.
+    return this.http.request(req).pipe(
+      map(event => this.getEventMessage(event, formData.get('file') as File)),
+      tap(message => this.showProgress(message)),
+      // last(), // return last (completed) message to caller
+      catchError(this.handleError)
+    );
+  }
+  // end post upload question
   private getEventMessage(event: HttpEvent<any>, file: File) {
     switch (event.type) {
       case HttpEventType.Sent:
