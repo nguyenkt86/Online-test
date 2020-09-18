@@ -24,11 +24,9 @@ export class CompetitionPageComponent implements OnInit {
   competition : Competition=new Competition();
   deleteMessage=false;
   competitionList:any;
-  isupdated = false;
 
 
   ngOnInit() {
-    this.isupdated=false;
     this.dtOptions = {
       pageLength: 6,
       stateSave:true,
@@ -55,43 +53,6 @@ export class CompetitionPageComponent implements OnInit {
             })
         },
         error => console.log(error));
-  }
-
-  updateAccount(id: number){
-    this.apiService.getAccountById(id)
-      .subscribe(
-        data => {
-          this.competitionList=data
-        },
-        error => console.log(error));
-  }
-
-  accountUpdateform=new FormGroup({
-    student_id:new FormControl(),
-  });
-
-  updateAcc(updAcc){
-    this.competition=new Competition();
-    this.competition.id=this.competitionName.value;
-
-
-
-
-   this.apiService.updateAccount(this.competition.id,this.competition).subscribe(
-    data => {
-      this.isupdated=true;
-      this.apiService.getAccountList().subscribe(data =>{
-        this.competitions =data
-        })
-    },
-    error => console.log(error));
-  }
-
-  get competitionName(){
-    return this.accountUpdateform.get('competition_name');
-  }
-  changeisUpdate(){
-    this.isupdated=false;
   }
   onClose(){
     this.deleteMessage=false;

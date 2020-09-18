@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Account} from 'src/app/models/account';
 import { ApiService } from 'src/app/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-update-account',
@@ -16,28 +18,41 @@ export class UpdateAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.account= new Account();
-    this.id = this.route.snapshot.params['id'];
+    this.id= parseInt( sessionStorage.getItem("accountId"),10);
+    console.log(this.id);
     this.apiService.getAccountById(this.id)
       .subscribe(data => {
         console.log(data)
         this.account = data;
       }, error => console.log(error));
   }
-  updateAccount() {
-    this.apiService.updateAccount(this.id, this.account)
-      .subscribe(data => {
-        console.log(data);
+  accountUpdateform=new FormGroup({
+    fullName:new FormControl(),
+    email:new FormControl(),
+  });
+
+  updateAcc(){
+    this.account.fullName=this.fullName.value;
+    this.account.email=this.email.value;
+    this.account.id=this.id;
+   this.apiService.updateAccount(this.account).subscribe(
+    data => {
         this.account = new Account();
         this.gotoList();
-      }, error => console.log(error));
+    },
+    error => console.log(error));
   }
 
-  onSubmit() {
-    this.updateAccount();
+  get fullName(){
+    return this.accountUpdateform.get('fullName');
+  }
+
+  get email(){
+    return this.accountUpdateform.get('email');
   }
 
   gotoList() {
-    this.router.navigate(['/account']);
+    this.router.navigate(['admin/account']);
   }
 
 }

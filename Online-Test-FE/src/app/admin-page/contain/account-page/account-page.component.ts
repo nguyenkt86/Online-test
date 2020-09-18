@@ -4,6 +4,7 @@ import { Account } from 'src/app/models/account';
 import { Subject, Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
@@ -13,7 +14,7 @@ export class AccountPageComponent implements OnInit {
 
   confirm: BsModalRef;
   modalref: BsModalRef;
-  constructor(private apiService: ApiService, private modal: BsModalService) { }
+  constructor(private apiService: ApiService, private modal: BsModalService, private router : Router) { }
 
   accountsArray: any[] = [];
   dtOptions: DataTables.Settings = {};
@@ -57,51 +58,8 @@ export class AccountPageComponent implements OnInit {
   }
 
   updateAccount(id: number){
-    this.apiService.getAccountById(id)
-      .subscribe(
-        data => {
-          this.accountList=[data]
-        },
-        error => console.log(error));
+    sessionStorage.removeItem("accountId");
+    sessionStorage.setItem("accountId",id+"");
+    this.router.navigate(['/admin/update-account']);
   }
-
-  accountUpdateform=new FormGroup({
-    id:new FormControl(),
-    fullName:new FormControl(),
-    email:new FormControl(),
-  });
-
-  updateAcc(updAcc){
-    this.account=new Account();
-    this.account.fullName=this.fullName.value;
-    this.account.email=this.email.value;
-    this.account.id=this.accountId.value;
-
-
-
-   this.apiService.updateAccount(this.account.id,this.account).subscribe(
-    data => {
-      this.isupdated=true;
-      this.apiService.getAccountList().subscribe(data =>{
-        this.accounts = data
-        })
-    },
-    error => console.log(error));
-  }
-
-  get fullName(){
-    return this.accountUpdateform.get('fullName');
-  }
-
-  get email(){
-    return this.accountUpdateform.get('email');
-  }
-  get accountId(){
-    return this.accountUpdateform.get('id');
-  }
-
-  changeisUpdate(){
-    this.isupdated=false;
-  }
-
 }

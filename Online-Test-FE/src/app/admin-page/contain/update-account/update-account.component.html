@@ -32,10 +32,10 @@
         </div>
       <div class="card-body">
         <div class="container">
-          <form [formGroup]="updateAccount()" (ngSubmit)="onSubmit()">
+          <form [formGroup]="accountUpdateform"  (ngSubmit)="updateAcc()">
             <div class="form-group">
-              <input type="text" class="form-control"  formControlName="fullName" placeholder="Full Name" >
-              <input type="text" class="form-control" formControlName="email" placeholder="Email">
+              <input type="text" class="form-control"  formControlName="fullName" placeholder="Full Name" [(ngModel)]="account.fullName">
+              <input type="text" class="form-control" formControlName="email" placeholder="Email" [(ngModel)]="account.email">
           </div>
 
             <button type="submit" class="btn btn-success">Submit</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-page',
@@ -9,9 +10,12 @@ export class AdminPageComponent implements OnInit {
 
   slide:boolean = false;
   display:boolean = false;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("isLogin")==null){
+      this.router.navigate(['/Login']);
+    }
   }
 
   menu(){
