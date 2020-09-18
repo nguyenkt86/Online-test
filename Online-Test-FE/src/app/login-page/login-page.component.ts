@@ -49,6 +49,7 @@ export class LoginPageComponent implements OnInit {
         this.loading = true;
         this.apiService.checkLogin(this.f.username.value, this.f.password.value).subscribe(
           data=>{
+            sessionStorage.setItem("isLogin",this.f.username.value);
             this.router.navigate(['/admin']);
           },
           error => {

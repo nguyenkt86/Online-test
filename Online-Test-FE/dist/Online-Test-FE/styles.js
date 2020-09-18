@@ -486,8 +486,8 @@ module.exports = content.locals || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Online-test\Online-Test-FE\src\styles.css */"./src/styles.css");
-module.exports = __webpack_require__(/*! D:\Online-test\Online-Test-FE\node_modules\datatables.net-dt\css\jquery.dataTables.css */"./node_modules/datatables.net-dt/css/jquery.dataTables.css");
+__webpack_require__(/*! F:\Training Spring\Online-test\Online-Test-FE\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! F:\Training Spring\Online-test\Online-Test-FE\node_modules\datatables.net-dt\css\jquery.dataTables.css */"./node_modules/datatables.net-dt/css/jquery.dataTables.css");
 
 
 /***/ })

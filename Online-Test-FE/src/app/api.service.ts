@@ -35,8 +35,8 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  updateAccount(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  updateAccount( value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}`, value);
   }
   //
   createCompetition(competition: object): Observable<object> {
